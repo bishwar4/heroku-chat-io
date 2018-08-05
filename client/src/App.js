@@ -14,10 +14,11 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <Route exact path="/" component={Logo} />
           <div className="container">
             {/* Router path */}
             <Route exact path="/admin" component={Admin} />
-            <Route exact path="/" component={Logo} />
+
             <Route exact path="/home" component={Home} />
             <Route exact path="/home/query" component={Query} />
             <Route exact path="/home/chat" component={Chat} />
