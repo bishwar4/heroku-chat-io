@@ -22,7 +22,7 @@ class Search extends Component {
       .post("/api/searchtoken/token", newData)
       .then(res => {
         this.setState({ data: res.data });
-        console.log(this.state.data);
+        // console.log(this.state.data);
       })
       .catch(err => console.log(err));
     this.setState({
