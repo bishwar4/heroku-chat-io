@@ -44,8 +44,15 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //asign port no
-const port = process.env.PORT || 5000;
-var server = app.listen(port, () => console.log("server running at" + port));
+var server = app.listen(process.env.PORT || 5000, function() {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
+});
+// const port = process.env.PORT || 5000;
+// var server = app.listen(port, () => console.log("server running at" + port));
 var io = socket(server);
 
 io.on("connection", socket => {
