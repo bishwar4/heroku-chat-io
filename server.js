@@ -26,7 +26,7 @@ mongoose
   .then(() => console.log("mongo db connected"))
   .catch(err => console.log(err));
 
-app.get("/", (req, res) => res.send("hello world"));
+// app.get("/", (req, res) => res.send("hello world"));
 
 //use Routes
 app.use("/api/register", register);
