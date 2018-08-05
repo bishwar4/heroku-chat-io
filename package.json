@@ -1,6 +1,5 @@
 {
-  "name": "mongochat",
-  "version": "1.0.0",
+  "name": "chatapplication",
   "description": "Simple chat app using sockets",
   "main": "server.js",
   "scripts": {
@@ -28,6 +27,6 @@
     "validator": "^9.4.1"
   },
   "devDependencies": {
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.18.3"
   }
 }
