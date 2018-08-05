@@ -14,3 +14,7 @@ This is the chat application devloped for the requirment by the Pracker
 ## Run Server
 
 npm run dev
+
+## current demo link is
+
+https://chat-io4.herokuapp.com/
