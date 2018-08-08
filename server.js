@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var socket = require("socket.io");
+var Chat = require("./models/chat");
 
 const register = require("./routes/api/register");
 const faq = require("./routes/api/faq");
@@ -51,14 +52,45 @@ var server = app.listen(process.env.PORT || 5000, function() {
     app.settings.env
   );
 });
-// const port = process.env.PORT || 5000;
-// var server = app.listen(port, () => console.log("server running at" + port));
+
 var io = socket(server);
 
 io.on("connection", socket => {
   console.log(socket.id);
 
-  socket.on("SEND_MESSAGE", function(data) {
-    io.emit("RECEIVE_MESSAGE", data);
+  socket.on("SEND_MESSAGE", data => {
+    var id = 1;
+    Chat.findOne({ id }).then(user => {
+      if (user) {
+        Chat.findOneAndUpdate(
+          { id: 1 },
+          {
+            $push: {
+              conversation: {
+                username: data.username,
+
+                message: data.message
+              }
+            }
+          },
+          { new: true },
+          (err, data) => {
+            io.emit("RECEIVE_MESSAGE", data);
+          }
+        );
+      } else {
+        const User = new Chat({
+          id: 1,
+          conversation: [
+            {
+              username: data.username,
+
+              message: data.message
+            }
+          ]
+        });
+        User.save();
+      }
+    });
   });
 });
