@@ -74,8 +74,8 @@ io.on("connection", socket => {
             }
           },
           { new: true },
-          (err, data) => {
-            io.emit("RECEIVE_MESSAGE", data);
+          (err, user) => {
+            io.emit("RECEIVE_MESSAGE", user);
           }
         );
       } else {
@@ -93,4 +93,8 @@ io.on("connection", socket => {
       }
     });
   });
+  //   io.emit("RECEIVE_MESSAGE", data=>
+  // {
+  //   Chat
+  // });
 });
