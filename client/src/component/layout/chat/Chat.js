@@ -20,7 +20,10 @@ class Chat extends React.Component {
 
     const addMessage = data => {
       // console.log(data);
-      this.setState({ messages: data.conversation });
+      // debugger;
+      this.setState({
+        messages: data.conversation
+      });
       // console.log(this.state.messages);
     };
 
@@ -39,9 +42,9 @@ class Chat extends React.Component {
         <div className="card-title">Client Chat</div>
         <hr />
         <div className="messages">
-          {this.state.messages.map(message => {
+          {this.state.messages.map(function(message, i) {
             return (
-              <div>
+              <div key={i}>
                 {message.username}: {message.message}
               </div>
             );
