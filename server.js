@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 var socket = require("socket.io");
 var Chat = require("./models/chat");
+const passport = require("passport");
 
 const register = require("./routes/api/register");
 const faq = require("./routes/api/faq");
 const searchtoken = require("./routes/api/searchtoken");
+const admin = require("./routes/api/admin");
 const path = require("path");
 
 const app = express();
@@ -29,10 +31,18 @@ mongoose
 
 // app.get("/", (req, res) => res.send("hello world"));
 
+//passport middleware
+app.use(passport.initialize());
+
+//Passport config
+
+require("./config/passport")(passport);
+
 //use Routes
 app.use("/api/register", register);
 app.use("/api/faq", faq);
 app.use("/api/searchtoken", searchtoken);
+app.use("/api/admin", admin);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

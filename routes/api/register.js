@@ -10,7 +10,7 @@ const rand = uniqueRandom(10000, 99999);
 //@desc Tests post route
 //@access public
 router.get("/test", (req, res) => {
-  Register.find().then(user => res.json({ user }));
+  res.json({ message: "serachtoken works" });
 });
 
 //@route GET api/register/track

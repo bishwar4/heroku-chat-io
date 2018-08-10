@@ -1,6 +1,7 @@
 import React from "react";
 import io from "socket.io-client";
 import "./Chat.css";
+import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class Chat extends React.Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class Chat extends React.Component {
       <div className="Chat">
         <div className="card-title">Client Chat</div>
         <hr />
+
         <div className="messages">
           {this.state.messages.map(function(message, i) {
             return (
@@ -50,19 +52,21 @@ class Chat extends React.Component {
             );
           })}
         </div>
+
         <div className="card-footer">
           <input
             type="text"
             placeholder="Username"
+            required="true"
             value={this.state.username}
             onChange={ev => this.setState({ username: ev.target.value })}
             className="form-control"
           />
           <br />
-          <input
-            type="text"
+          <textarea
             placeholder="Message"
             className="form-control"
+            required
             value={this.state.message}
             onChange={ev => this.setState({ message: ev.target.value })}
           />

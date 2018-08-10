@@ -2,4 +2,6 @@
   position: fixed;
   bottom: 0;
   right: 0;
+  max-width: 250px;
+  max-height: auto;
 }
