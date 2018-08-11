@@ -11,8 +11,11 @@ export default class home extends Component {
           <br />
           <small>
             <p>
-              hello,<br /> i am {"{"}BIZ{"}"} Bot, how i can<br /> help you
-              today?
+              hello,
+              <br /> i am {"{"}
+              BIZ
+              {"}"} Bot, how i can
+              <br /> help you today?
             </p>
           </small>
           <Link to="./home/chat">

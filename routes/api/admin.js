@@ -8,6 +8,10 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 const passport = require("passport");
 
+//load input validator
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+
 //@route GET /api/admin/test
 //@desc Tests get route
 //@access public
@@ -17,9 +21,17 @@ router.get("/test", (req, res) => res.json({ message: "admin works" }));
 //@desc register admin
 //@access public
 router.post("/register", (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // Check Validation
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Admin.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      return res.status(400).json({ email: "email alredy exist" });
+      errors.email = "Email already exists";
+      return res.status(400).json({ errors });
     } else {
       const avatar = gravatar.url(req.body.email, {
         s: "200", // Size
@@ -49,6 +61,13 @@ router.post("/register", (req, res) => {
 //@desc Login admin/returning jwt
 //@access public
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check Validation
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
@@ -56,7 +75,8 @@ router.post("/login", (req, res) => {
 
   Admin.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(404).json({ email: "user not found" });
+      errors.email = "User not found";
+      return res.status(404).json({ errors });
     }
     //check password
     bcrypt.compare(password, user.password).then(isMatch => {
@@ -80,7 +100,8 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        return res.status(400).json({ password: "password incorrect" });
+        errors.password = "password inncorect";
+        return res.status(400).json({ errors });
       }
     });
   });
