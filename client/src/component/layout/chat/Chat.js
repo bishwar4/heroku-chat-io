@@ -71,10 +71,7 @@ class Chat extends React.Component {
             onChange={ev => this.setState({ message: ev.target.value })}
           />
           <br />
-          <button
-            onClick={this.sendMessage}
-            className="btn btn-primary form-control"
-          >
+          <button onClick={this.sendMessage} className="btn btn-primary">
             Send
           </button>
         </div>
